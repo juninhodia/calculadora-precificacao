@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Custo e Lucro</title>
+  <link rel="stylesheet" href="reset.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="header.css">
+
+</head>
+<body>
+
+  <div id="container">
+    <img src="assets/Design sem nome (2).png" alt="" width="30%" class="logo-cira">
+    <h2 class="titulo__principal">Precificação Alinhada com Qualidade</h2>
+    <p class="texto_de_uso">Para que a Calculadora funcione, é necessário preencher todos os campos retangulares. Se algum campo estiver vazio, insira o número zero.</p>
+    <label for="custoProduto">Custo do Produto:</label>
+    <input type="number" id="custoProduto" placeholder="0" >
+    
+    <label for="descontoFornecedor">Desconto do Fornecedor (%):</label>
+    <input type="number" id="descontoFornecedor" placeholder="0">
+    
+    <label for="impostoICMS">Imposto do ICMS (%):</label>
+    <input type="number" id="impostoICMS" placeholder="0">
+    
+    <label for="custoFrete">Custo do Frete por Produto:</label>
+    <input type="number" id="custoFrete" placeholder="0">
+    
+    <label for="embalagem">Custo da Embalagem:</label>
+    <input type="number" id="embalagem" placeholder="0">
+    
+    <label for="lucroDesejado">Lucro Desejado (%):</label>
+    <input type="number" id="lucroDesejado" placeholder="0">
+    
+    <button id="calcular">Calcular Preços</button>
+    
+    <div id="resultado"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

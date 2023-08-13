@@ -1,0 +1,29 @@
+@import url(style/main.css);
+@import url(style/header.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-principal:'Montserrat', sans-serif;
+  --fon-secundario:'Poppins', sans-serif;
+  --cor-font:#808080;
+
+  --cor-fundo:#f1f1f1;
+  --cor-header-font:#333333;
+  --cor-footer:#002244
+
+}
+
+body {
+  font-family:var(--fon-secundario);
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
