@@ -9,10 +9,10 @@ const calcularButton = document.getElementById("calcular");
       const embalagem = parseFloat(document.getElementById("embalagem").value);
       const lucroDesejado = parseFloat(document.getElementById("lucroDesejado").value);
 
-      const custoTotal = custoProduto - (custoProduto * (descontoFornecedor / 100)) + custoFrete + embalagem;
+      const custoTotal = custoProduto - (custoProduto * (descontoFornecedor / 100));
       const impostoTotal = custoTotal * (impostoICMS / 100);
       const custoComImposto = custoTotal + impostoTotal;
-      const precoVenda = custoComImposto + (custoComImposto * (lucroDesejado / 100));
+      const precoVenda = custoComImposto + custoFrete + embalagem + (custoComImposto * (lucroDesejado / 100));
 
       resultadoDiv.innerHTML = `Preço de Venda: R$ ${precoVenda.toFixed(2)} <br><br>`;
       resultadoDiv.innerHTML += `<button id="verPrecos">Ver Preços por Tipo de Cartão</button>`;
