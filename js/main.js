@@ -1,34 +1,78 @@
-const calcularButton = document.getElementById("calcular");
-    const resultadoDiv = document.getElementById("resultado");
+ function calcular() {
+        const inputs = document.querySelectorAll('input');
+        let invalidInput = false;
 
-    calcularButton.addEventListener("click", () => {
-      const custoProduto = parseFloat(document.getElementById("custoProduto").value);
-      const descontoFornecedor = parseFloat(document.getElementById("descontoFornecedor").value);
-      const impostoICMS = parseFloat(document.getElementById("impostoICMS").value);
-      const custoFrete = parseFloat(document.getElementById("custoFrete").value);
-      const embalagem = parseFloat(document.getElementById("embalagem").value);
-      const lucroDesejado = parseFloat(document.getElementById("lucroDesejado").value);
+        inputs.forEach(input => {
+            if (!input.value || isNaN(input.value)) {
+                input.classList.add('invalid');
+                invalidInput = true;
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
 
-      const custoTotal = custoProduto - (custoProduto * (descontoFornecedor / 100));
-      const impostoTotal = custoTotal * (impostoICMS / 100);
-      const custoComImposto = custoTotal + impostoTotal;
-      const precoVenda = custoComImposto + custoFrete + embalagem + (custoComImposto * (lucroDesejado / 100));
+        if (invalidInput) return;
 
-      resultadoDiv.innerHTML = `Preço de Venda: R$ ${precoVenda.toFixed(2)} <br><br>`;
-      resultadoDiv.innerHTML += `<button id="verPrecos">Ver Preços por Tipo de Cartão</button>`;
-    });
+        const valorProduto = parseFloat(document.getElementById('valorProduto').value);
+        const descontoFornecedor = parseFloat(document.getElementById('descontoFornecedor').value) / 100;
+        const icms = parseFloat(document.getElementById('icms').value) / 100;
+        const frete = parseFloat(document.getElementById('frete').value);
+        const embalagem = parseFloat(document.getElementById('embalagem').value)
+        const lucroDesejado = parseFloat(document.getElementById('lucroDesejado').value) / 100;
 
-    resultadoDiv.addEventListener("click", (event) => {
-      if (event.target.id === "verPrecos") {
-        const taxaDebito = parseFloat(prompt("Digite a taxa de Cartão de Débito (%):"));
-        const taxaCredito = parseFloat(prompt("Digite a taxa de Cartão de Crédito (%):"));
 
-        const precoVenda = parseFloat(resultadoDiv.textContent.match(/\d+\.\d+/)[0]);
+        const valorReal = ((valorProduto - (valorProduto * descontoFornecedor) + (valorProduto * icms)));
+        const gastoOperacional = frete + embalagem;
+        const valorFinal = valorReal + (valorReal * lucroDesejado) + (frete + embalagem);
+        const lucroLiquido = valorFinal - valorReal - gastoOperacional ;
+       
 
-        const precoDebito = precoVenda + (precoVenda * (taxaDebito / 100));
-        const precoCredito = precoVenda + (precoVenda * (taxaCredito / 100));
+        document.getElementById('valorReal').innerText = valorReal.toFixed(2);
+        document.getElementById('lucroLiquido').innerText = lucroLiquido.toFixed(2);
+        document.getElementById('valorFinal').innerText = valorFinal.toFixed(2);
+        document.getElementById('gastoOperacional').innerHTML = gastoOperacional.toFixed(2)
+    }
 
-        resultadoDiv.innerHTML += `<br>Preço com Cartão de Débito: R$ ${precoDebito.toFixed(2)}`;
-        resultadoDiv.innerHTML += `<br>Preço com Cartão de Crédito: R$ ${precoCredito.toFixed(2)}`;
-      }
-    });
+    function resetFields() {
+        document.querySelectorAll('input').forEach(input => {
+            input.value = '';
+            input.classList.remove('invalid');
+        });
+    }
+
+  
+  function toggleDiv() {
+    var div = document.getElementById("duvida");
+    if (div.classList.contains("showing")) {
+        div.style.opacity = '0';
+        div.style.transform = 'translateY(-50px)';
+        setTimeout(function() {
+            div.style.display = 'none';
+        }, 500);
+        div.classList.remove("showing");
+    } else {
+        div.style.display = 'block';
+        setTimeout(function() {
+            div.style.opacity = '1';
+            div.style.transform = 'translateY(0)';
+        }, 10);
+        div.classList.add("showing");
+    }
+}
+
+const text = "Defina seu valor, impulsione seus lucros!";
+const typedOutput = document.getElementById("typed-output");
+let index = 0;
+
+function typeText() {
+    if (index < text.length) {
+        typedOutput.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 100); // Define a velocidade da "digitação"
+    } else {
+        // Após terminar a "digitação", remova a animação do cursor
+        document.querySelector('.cursor').style.animation = 'none';
+    }
+}
+
+typeText();
