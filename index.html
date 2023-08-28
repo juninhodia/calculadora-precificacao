@@ -1,44 +1,100 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Custo e Lucro</title>
-  <link rel="stylesheet" href="reset.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Elegante</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="header.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div id="container">
-    <img src="assets/Design sem nome (2).png" alt="" width="30%" class="logo-cira">
-    <h2 class="titulo__principal">Precificação Alinhada com Qualidade</h2>
-    <p class="texto_de_uso">Para que a Calculadora funcione, é necessário preencher todos os campos retangulares. Se algum campo estiver vazio, insira o número zero.</p>
-    <label for="custoProduto">Custo do Produto:</label>
-    <input type="number" id="custoProduto" placeholder="0" >
-    
-    <label for="descontoFornecedor">Desconto do Fornecedor (%):</label>
-    <input type="number" id="descontoFornecedor" placeholder="0">
-    
-    <label for="impostoICMS">Imposto do ICMS (%):</label>
-    <input type="number" id="impostoICMS" placeholder="0">
-    
-    <label for="custoFrete">Custo do Frete por Produto:</label>
-    <input type="number" id="custoFrete" placeholder="0">
-    
-    <label for="embalagem">Custo da Embalagem:</label>
-    <input type="number" id="embalagem" placeholder="0">
-    
-    <label for="lucroDesejado">Lucro Desejado (%):</label>
-    <input type="number" id="lucroDesejado" placeholder="0">
-    
-    <button id="calcular">Calcular Preços</button>
-    
-    <div id="resultado"></div>
-  </div>
+<div class="container">
 
-  <script src="js/main.js"></script>
+    <div class="header">
+        <div class="logo">
+            <img src="assets/Design sem nome (2).png" alt="" class="logo__cira">
+            <div class="typing-container">
+                <span id="typed-output"></span><span class="cursor">|</span>
+            </div>
+        </div>
+        <button class="btn-usar" onclick="toggleDiv()">Como Usar ?</button>
+        <div id="duvida">
+            <button onclick="toggleDiv()" class="btn-sair">X</button>
+            <h2 class="menssagem">Olá! Bem-vindo à nossa Calculadora de Precificação. Aqui está um guia simples e fácil de entender para ajudá-lo a usar o site corretamente:</h2>
+
+            <ul>
+                <li class="negrito"> <p class="negrito__principal"> Campos de Entrada:</p></li>
+                <li><strong class="negrito">Valor do Produto:</strong> Digite o valor original do seu produto sem qualquer desconto ou adição de impostos. </li>
+                <li><strong class="negrito">Desconto do Fornecedor:</strong> Informe o percentual de desconto fornecido pelo fornecedor. Ex: Para um desconto de 10%, basta digitar "10".</li>
+                <li><strong class="negrito">Imposto ICMS:</strong> Digite a porcentagem de imposto ICMS que será aplicada. Ex: Para um imposto de 7%, basta digitar "7".</li>
+                <li>><strong class="negrito">Custo de Frete por Produto:</strong>  Informe o valor do frete por unidade do produto. <strong class="negrito">Soma</strong>o total de itens do pedido, <strong class="negrito">dividi</strong> pelo o valor total do Frete</li>
+                <li><strong class="negrito">Lucro Desejado:</strong> Defina a porcentagem de lucro que você deseja ter sobre o preço final. Ex: Para um imposto de 70%, basta digitar "70".</li>
+                <li class="negrito"> <p class="negrito__principal">Atenção aos campos:</p></li>
+                <li><strong class="negrito">Atenção aos campos:</strong> Certifique-se de preencher todos os campos. Se algum campo for deixado em branco ou contiver texto não numérico, ele ficará vermelho, e um aviso aparecerá indicando que você deve preencher com "0" ou o valor desejado.</li>
+                <li class="negrito"> <p class="negrito__principal">Resultados:</p></li>
+                <li><strong class="negrito">Valor Real do Produto:</strong> Mostra o valor do produto após considerar o desconto do fornecedor e a adição do ICMS. </li>
+                <li><strong class="negrito">Lucro Líquido:</strong> Mostra a diferença entre o valor real e o valor final do produto, representando seu lucro.</li>
+                <li><strong class="negrito">Valor Final do Produto:</strong> Este é o valor que o cliente pagará, considerando todos os descontos, impostos, frete e seu lucro desejado.</li>
+                <li><strong class="negrito">Gastos Operacionais:</strong> Este é o valor que o cliente pagará, com custos de Embalagem e Frete.</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <label for="valorProduto">Valor do Produto:</label>
+    <input type="number" id="valorProduto" placeholder="Insira o valor ou 0">
+
+    <label for="descontoFornecedor">Desconto do Fornecedor (%):</label>
+    <input type="number" id="descontoFornecedor" placeholder="Insira o valor ou 0">
+
+    <label for="icms">Imposto ICMS (%):</label>
+    <input type="number" id="icms" placeholder="Insira o valor ou 0">
+
+    <label for="frete">Custo do Frete por Produto:</label>
+    <input type="number" id="frete" placeholder="Insira o valor ou 0">
+
+    <label for="lucroDesejado">Embalagem:</label>
+    <input type="number" id="embalagem" placeholder="Insira o valor ou 0">
+
+    <label for="lucroDesejado">Lucro Desejado (%):</label>
+    <input type="number" id="lucroDesejado" placeholder="Insira o valor ou 0">
+
+    <button class="btn-primary" onclick="calcular()">Calcular</button>
+    <button class="btn-secondary" onclick="resetFields()">Zerar</button>
+    
+
+    <div class="results">
+        <div>
+            <strong>Valor do Produto:</strong>
+            <p>R$<span id="valorReal">0</span></p>
+        </div>
+        <div>
+            <strong>Gastos Operacionais:</strong>
+            <p>R$<span id="gastoOperacional">0</span></p>
+        </div>
+        <div>
+            <strong>Lucro Líquido:</strong>
+            <p>R$<span id="lucroLiquido">0</span></p>
+        </div>
+        <div>
+            <strong>Valor Final:</strong>
+            <p>R$<span id="valorFinal">0</span></p>
+        </div>
+        
+    </div>
+
+    <div class="footer">
+        <small>Calculadora feita por <a href="https://www.instagram.com/cira_tecnologia/" class="footer__logo">CIRA</a></small>
+    </div>
+    
+
+</div>
+
+<script src="js/main.js"></script>
 </body>
 </html>
